@@ -31,7 +31,7 @@ jobs:
           unzip -q "TempShellX-Android7-16-source (2).zip" -d extracted
           test -f extracted/TempShellX/settings.gradle.kts
 
-      - name: Fix JVM target and Kotlin shell escaping
+      - name: Fix JVM target and iQOO SU path
         run: |
           cat << 'EOF' >> extracted/TempShellX/app/build.gradle.kts
 
@@ -50,6 +50,7 @@ jobs:
           EOF
 
           sed -i 's/\$d/\\\$d/g; s/\$p/\\\$p/g' extracted/TempShellX/app/src/main/java/com/tempshellx/MainActivity.kt
+          sed -i 's|ProcessBuilder("su", "-c", command)|ProcessBuilder("/apex/com.android.virt/bin/su", "-c", command)|g' extracted/TempShellX/app/src/main/java/com/tempshellx/MainActivity.kt
 
       - name: Build debug APK
         working-directory: extracted/TempShellX
