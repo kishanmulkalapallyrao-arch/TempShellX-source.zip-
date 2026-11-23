@@ -26,8 +26,8 @@ jobs:
 
       - name: Extract Android project
         run: |
-          test -f TempShellX-source.zip
-          unzip -q TempShellX-source.zip -d extracted
+          test -f TempShellX-Android7-16-source.zip
+          unzip -q TempShellX-Android7-16-source.zip -d extracted
           test -f extracted/TempShellX/settings.gradle.kts
 
       - name: Build debug APK
